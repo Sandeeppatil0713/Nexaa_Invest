@@ -13,20 +13,6 @@ function FloatingLights() {
         style={{ animationDelay: "-6s" }}
       />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-      {[...Array(18)].map((_, i) => (
-        <motion.span
-          key={i}
-          className="absolute size-1 rounded-full bg-primary/70"
-          style={{ left: `${(i * 53) % 100}%`, top: `${(i * 37) % 100}%` }}
-          animate={{ y: [0, -40, 0], opacity: [0, 0.9, 0] }}
-          transition={{
-            duration: 6 + (i % 5),
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
     </div>
   );
 }
@@ -71,45 +57,25 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground"
-          >
+          <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-muted-foreground">
             <Sparkles className="size-3.5 text-accent" />
             Automated daily ROI · Level income up to 4 levels
-          </motion.span>
+          </span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-4xl leading-[1.05] font-semibold sm:text-5xl md:text-6xl lg:text-7xl"
-          >
+          <h1 className="mt-6 text-4xl leading-[1.05] font-semibold sm:text-5xl md:text-6xl lg:text-7xl">
             Invest Smarter.
             <br />
             <span className="text-gradient">Earn Daily.</span>
             <br />
             Grow Together.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.18 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
-          >
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
             A secure investment platform where users can invest in plans, earn daily ROI,
             build referral networks, and track everything from a beautiful dashboard.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.26 }}
-            className="mt-9 flex flex-wrap gap-3"
-          >
+          <div className="mt-9 flex flex-wrap gap-3">
             <Link
               to="/register"
               className="bg-brand group inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_-10px_rgba(59,130,246,0.9)]"
@@ -124,20 +90,11 @@ export function Hero() {
               <LayoutDashboard className="size-4" />
               View Dashboard
             </Link>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40, rotateX: 12 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative [perspective:1400px]"
-        >
-          <motion.div
-            animate={{ y: [0, -14, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="glass rounded-3xl p-5 shadow-[0_50px_120px_-40px_rgba(0,0,0,1)]"
-          >
+        <div className="relative [perspective:1400px]">
+          <div className="glass rounded-3xl p-5 shadow-[0_50px_120px_-40px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs text-muted-foreground">Total Portfolio</p>
@@ -168,7 +125,7 @@ export function Hero() {
                     key={i}
                     initial={{ height: 0 }}
                     animate={{ height: `${h}%` }}
-                    transition={{ duration: 0.9, delay: 0.5 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.8, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                     className="flex-1 rounded-t-md bg-gradient-to-t from-primary/25 to-primary"
                     style={{
                       backgroundImage:
@@ -180,18 +137,14 @@ export function Hero() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="glass absolute -bottom-8 -left-4 hidden rounded-2xl p-4 sm:block"
-          >
+          <div className="glass absolute -bottom-8 -left-4 hidden rounded-2xl p-4 sm:block">
             <p className="text-xs text-muted-foreground">ROI credited</p>
             <p className="font-display text-lg font-semibold text-success">+ ₹2,140.00</p>
             <p className="text-[11px] text-muted-foreground">Today · 12:00 AM cron</p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
