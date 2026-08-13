@@ -49,18 +49,22 @@ export function Field({
   autoComplete?: string;
   error?: string;
 }) {
+  const id = `field-${name ?? label.toLowerCase().replace(/\s+/g, "-")}`;
   const isControlled = value !== undefined;
 
   return (
-    <label className="block">
-      <span className="text-xs text-muted-foreground">{label}</span>
-      <span
+    <div className="block">
+      <label htmlFor={id} className="text-xs text-muted-foreground select-none cursor-pointer">
+        {label}
+      </label>
+      <div
         className={`mt-1.5 flex items-center gap-2 rounded-2xl border bg-secondary/40 px-4 transition-colors focus-within:border-primary ${
           error ? "border-destructive/60" : "border-input"
         }`}
       >
-        <span className="text-muted-foreground">{icon}</span>
+        <span className="text-muted-foreground pointer-events-none shrink-0">{icon}</span>
         <input
+          id={id}
           type={type}
           name={name}
           placeholder={placeholder}
@@ -69,10 +73,10 @@ export function Field({
           {...(isControlled ? { value, onChange } : {})}
           className="h-12 w-full bg-transparent text-sm text-foreground font-medium outline-none placeholder:text-muted-foreground/60"
         />
-      </span>
+      </div>
       {error && (
         <span className="mt-1 block text-[11px] text-destructive">{error}</span>
       )}
-    </label>
+    </div>
   );
 }
