@@ -1,11 +1,8 @@
-import { motion, useInView, useMotionValue, useSpring } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Reveal({
   children,
-  delay = 0,
-  y = 24,
   className,
 }: {
   children: ReactNode;
@@ -13,17 +10,7 @@ export function Reveal({
   y?: number;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export function StaggerGrid({
@@ -33,17 +20,7 @@ export function StaggerGrid({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export function StaggerItem({
@@ -53,18 +30,7 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 26, scale: 0.98 },
-        show: { opacity: 1, y: 0, scale: 1 },
-      }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export function Counter({
@@ -80,31 +46,13 @@ export function Counter({
   suffix?: string;
   className?: string;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const mv = useMotionValue(0);
-  const spring = useSpring(mv, { duration: 1600, bounce: 0 });
-  const [display, setDisplay] = useState("0");
-
-  useEffect(() => {
-    if (inView) mv.set(value);
-  }, [inView, mv, value]);
-
-  useEffect(
-    () =>
-      spring.on("change", (v) =>
-        setDisplay(
-          v.toLocaleString("en-US", {
-            minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals,
-          }),
-        ),
-      ),
-    [spring, decimals],
-  );
+  const display = value.toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
 
   return (
-    <span ref={ref} className={className}>
+    <span className={className}>
       {prefix}
       {display}
       {suffix}
@@ -124,8 +72,8 @@ export function GlassCard({
   return (
     <div
       className={cn(
-        "glass gradient-border rounded-2xl p-6 transition-all duration-300",
-        hover && "hover:-translate-y-1 hover:shadow-[0_30px_70px_-30px_rgba(0,0,0,0.9)]",
+        "glass gradient-border rounded-2xl p-6 transition-all duration-150",
+        hover && "hover:-translate-y-0.5",
         className,
       )}
     >
@@ -146,7 +94,7 @@ export function SectionHeading({
   align?: "center" | "left";
 }) {
   return (
-    <Reveal
+    <div
       className={cn(
         "max-w-2xl",
         align === "center" ? "mx-auto text-center" : "text-left",
@@ -165,6 +113,6 @@ export function SectionHeading({
           {subtitle}
         </p>
       ) : null}
-    </Reveal>
+    </div>
   );
 }
