@@ -61,7 +61,8 @@ function RegisterPage() {
         ...(form.referralCode ? { referralCode: form.referralCode } : {}),
       });
       await refreshUser();
-      toast.success(`Account created! Your referral code is ${user.referralCode}`);
+      const refCode = user?.referralCode ? ` Your referral code is ${user.referralCode}.` : "";
+      toast.success(`Account created!${refCode}`);
       navigate({ to: "/dashboard" });
     } catch (err) {
       if (err instanceof ApiError) {

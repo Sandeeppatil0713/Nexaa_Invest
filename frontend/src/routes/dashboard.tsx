@@ -88,12 +88,11 @@ function formatDate(iso: string) {
   });
 }
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? "")
-    .join("");
+function initials(name?: string) {
+  if (!name || typeof name !== "string") return "U";
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "U";
+  return parts.slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("");
 }
 
 // ─── Email verification banner + OTP modal ────────────────────────────────────

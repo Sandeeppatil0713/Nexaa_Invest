@@ -38,7 +38,8 @@ function LoginPage() {
     try {
       const { user } = await apiLogin({ email, password });
       await refreshUser();
-      toast.success(`Welcome back, ${user.fullName.split(" ")[0]}!`);
+      const firstName = user?.fullName && typeof user.fullName === "string" ? user.fullName.trim().split(" ")[0] : "User";
+      toast.success(`Welcome back, ${firstName}!`);
       navigate({ to: "/dashboard" });
     } catch (err) {
       if (err instanceof ApiError) {

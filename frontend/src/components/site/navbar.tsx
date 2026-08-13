@@ -48,9 +48,10 @@ export function Navbar() {
     navigate({ to: "/" });
   }
 
-  const initials = user
-    ? user.fullName.split(" ").slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("")
-    : "";
+  const initials =
+    user?.fullName && typeof user.fullName === "string"
+      ? user.fullName.trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("")
+      : "U";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3">
