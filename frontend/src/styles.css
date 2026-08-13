@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -127,7 +126,7 @@
   }
 
   html {
-    scroll-behavior: auto; /* Instant scroll navigation, remove smoothness overhead */
+    scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -151,77 +150,74 @@
   }
 }
 
-@utility glass {
+.glass {
   background: oklch(0.11 0.008 260 / 85%);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-glass);
 }
 
-@utility text-gradient {
+.text-gradient {
   background-image: var(--gradient-brand);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
 
-@utility bg-brand {
+.bg-brand {
   background-image: var(--gradient-brand);
 }
 
-@utility glow-primary {
+.glow-primary {
   box-shadow: var(--shadow-glow-primary);
 }
 
-@utility glow-accent {
+.glow-accent {
   box-shadow: var(--shadow-glow-accent);
 }
 
-@utility grid-pattern {
+.grid-pattern {
   background-image:
     linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 
-/* Animated gradient border wrapper */
-@utility gradient-border {
+/* Gradient border wrapper */
+.gradient-border {
   position: relative;
   isolation: isolate;
 }
 
-@layer components {
-  .gradient-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      130deg,
-      color-mix(in oklab, var(--primary) 70%, transparent),
-      transparent 40%,
-      transparent 60%,
-      color-mix(in oklab, var(--accent) 70%, transparent)
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-  }
-
-  .gradient-border:hover::before {
-    opacity: 1;
-  }
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    130deg,
+    color-mix(in oklab, var(--primary) 70%, transparent),
+    transparent 40%,
+    transparent 60%,
+    color-mix(in oklab, var(--accent) 70%, transparent)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
 }
 
-@utility animate-float-slow {
-  /* Disabled infinite heavy GPU blur loops */
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+.animate-float-slow {
   animation: none;
 }
